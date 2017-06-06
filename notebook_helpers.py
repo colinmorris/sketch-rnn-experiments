@@ -61,6 +61,8 @@ def draw_strokes(data, factor=0.2, svg_filename = '/tmp/sketch_rnn/svg/sample.sv
 
 # generate a 2D grid of many vector drawings
 def make_grid_svg(s_list, grid_space=10.0, grid_space_x=16.0):
+  grid_space = float(grid_space)
+  grid_space_x = float(grid_space_x)
   def get_start_and_end(x):
     x = np.array(x)
     x = x[:, 0:2]
