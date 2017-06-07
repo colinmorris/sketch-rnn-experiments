@@ -9,7 +9,7 @@ from six.moves import xrange
 
 # little function that displays vector images and saves them to .svg
 def draw_strokes(data, factor=0.2, svg_filename = '/tmp/sketch_rnn/svg/sample.svg', 
-    echo=True, stroke_width=1, padding=25, size=None,
+    echo=True, stroke_width=1, padx=25, pady=25, size=None,
     multipath=False,
 ):
   tf.gfile.MakeDirs(os.path.dirname(svg_filename))
@@ -17,8 +17,8 @@ def draw_strokes(data, factor=0.2, svg_filename = '/tmp/sketch_rnn/svg/sample.sv
   if size:
     w0, h0 = (max_x-min_x), (max_y-min_y)
     w, h = size
-    winner = w-(padding*2)
-    hinner = h-(padding*2)
+    winner = w-(padx*2)
+    hinner = h-(pady*2)
     xscale = winner / w0
     yscale = hinner / h0
     scale = min(xscale, yscale)
@@ -26,8 +26,9 @@ def draw_strokes(data, factor=0.2, svg_filename = '/tmp/sketch_rnn/svg/sample.sv
     ypad = (h-(scale*h0))/2
     dims = (w, h)
   else:
-    dims = (padding*2 + max_x - min_x, padding*2 + max_y - min_y)
-    xpad = ypad = padding
+    dims = (padx*2 + max_x - min_x, pady*2 + max_y - min_y)
+    xpad = padx
+    ypad = pady
     scale = 1
     
   dwg = svgwrite.Drawing(svg_filename, size=dims)
